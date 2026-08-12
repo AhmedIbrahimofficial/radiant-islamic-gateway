@@ -103,8 +103,9 @@
   --emerald-deep: oklch(0.26 0.06 162);
   --gradient-hero: linear-gradient(
     180deg,
-    color-mix(in oklab, var(--emerald-deep) 55%, transparent),
-    color-mix(in oklab, var(--emerald-deep) 92%, transparent)
+    color-mix(in oklab, var(--emerald-deep) 30%, transparent) 0%,
+    color-mix(in oklab, var(--emerald-deep) 45%, transparent) 45%,
+    color-mix(in oklab, var(--emerald-deep) 88%, transparent) 100%
   );
   --gradient-emerald: linear-gradient(135deg, var(--emerald-deep), var(--primary));
   --gradient-gold: linear-gradient(135deg, var(--gold), var(--gold-soft));

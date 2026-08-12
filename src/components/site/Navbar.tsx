@@ -29,7 +29,9 @@ export function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled || !overHero ? "glass-dark shadow-luxe" : "bg-transparent"
+        scrolled || !overHero
+          ? "border-b border-gold/20 bg-emerald-deep/95 shadow-luxe backdrop-blur-xl"
+          : "bg-transparent"
       }`}
     >
       <nav className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-6 lg:py-4">
@@ -72,7 +74,7 @@ export function Navbar() {
       </nav>
 
       {open && (
-        <div className="glass-dark border-t border-gold/20 px-4 pb-6 pt-2 xl:hidden">
+        <div className="border-t border-gold/20 bg-emerald-deep/97 px-4 pt-2 pb-6 backdrop-blur-xl xl:hidden">
           <div className="grid gap-1">
             {links.map((l) => (
               <Link

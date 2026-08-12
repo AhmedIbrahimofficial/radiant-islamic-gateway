@@ -207,7 +207,7 @@ function SurahReader() {
               <AudioPlayer number={number} />
             </div>
 
-            {number !== 1 && number !== 9 && (
+            {number !== 1 && number !== 9 && !data.arabic[0]?.text.startsWith("بِسْمِ") && (
               <p className="font-arabic mt-10 text-center text-3xl text-primary">
                 بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
               </p>

@@ -60,7 +60,7 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-1 xl:flex">
+        <div className="hidden max-w-full flex-wrap items-center justify-end gap-1 xl:flex">
           {links.map((l) => (
             <Link
               key={l.to}

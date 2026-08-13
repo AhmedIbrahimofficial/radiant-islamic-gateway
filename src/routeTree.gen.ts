@@ -21,6 +21,7 @@ import { Route as NamesRouteImport } from './routes/names'
 import { Route as PrayerTimesRouteImport } from './routes/prayer-times'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as QuranRouteImport } from './routes/quran'
+import { Route as ZakatRouteImport } from './routes/zakat'
 import { Route as QuranIndexRouteImport } from './routes/quran.index'
 import { Route as QuranSurahIdRouteImport } from './routes/quran.$surahId'
 
@@ -84,6 +85,11 @@ const QuranRoute = QuranRouteImport.update({
   path: '/quran',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ZakatRoute = ZakatRouteImport.update({
+  id: '/zakat',
+  path: '/zakat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const QuranIndexRoute = QuranIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/prayer-times': typeof PrayerTimesRoute
   '/quiz': typeof QuizRoute
   '/quran': typeof QuranRouteWithChildren
+  '/zakat': typeof ZakatRoute
   '/quran/$surahId': typeof QuranSurahIdRoute
   '/quran/': typeof QuranIndexRoute
 }
@@ -123,6 +130,7 @@ export interface FileRoutesByTo {
   '/names': typeof NamesRoute
   '/prayer-times': typeof PrayerTimesRoute
   '/quiz': typeof QuizRoute
+  '/zakat': typeof ZakatRoute
   '/quran/$surahId': typeof QuranSurahIdRoute
   '/quran': typeof QuranIndexRoute
 }
@@ -140,6 +148,7 @@ export interface FileRoutesById {
   '/prayer-times': typeof PrayerTimesRoute
   '/quiz': typeof QuizRoute
   '/quran': typeof QuranRouteWithChildren
+  '/zakat': typeof ZakatRoute
   '/quran/$surahId': typeof QuranSurahIdRoute
   '/quran/': typeof QuranIndexRoute
 }
@@ -158,6 +167,7 @@ export interface FileRouteTypes {
     | '/prayer-times'
     | '/quiz'
     | '/quran'
+    | '/zakat'
     | '/quran/$surahId'
     | '/quran/'
   fileRoutesByTo: FileRoutesByTo
@@ -173,6 +183,7 @@ export interface FileRouteTypes {
     | '/names'
     | '/prayer-times'
     | '/quiz'
+    | '/zakat'
     | '/quran/$surahId'
     | '/quran'
   id:
@@ -189,6 +200,7 @@ export interface FileRouteTypes {
     | '/prayer-times'
     | '/quiz'
     | '/quran'
+    | '/zakat'
     | '/quran/$surahId'
     | '/quran/'
   fileRoutesById: FileRoutesById
@@ -206,6 +218,7 @@ export interface RootRouteChildren {
   PrayerTimesRoute: typeof PrayerTimesRoute
   QuizRoute: typeof QuizRoute
   QuranRoute: typeof QuranRouteWithChildren
+  ZakatRoute: typeof ZakatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -294,6 +307,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuranRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/zakat': {
+      id: '/zakat'
+      path: '/zakat'
+      fullPath: '/zakat'
+      preLoaderRoute: typeof ZakatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/quran/': {
       id: '/quran/'
       path: '/'
@@ -336,6 +356,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrayerTimesRoute: PrayerTimesRoute,
   QuizRoute: QuizRoute,
   QuranRoute: QuranRouteWithChildren,
+  ZakatRoute: ZakatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

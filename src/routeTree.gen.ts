@@ -14,6 +14,7 @@ import { Route as AcademyRouteImport } from './routes/academy'
 import { Route as ArticlesRouteImport } from './routes/articles'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DuasRouteImport } from './routes/duas'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as HadithRouteImport } from './routes/hadith'
@@ -54,6 +55,11 @@ const CommunityRoute = CommunityRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DuasRoute = DuasRouteImport.update({
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/articles': typeof ArticlesRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRoute
   '/duas': typeof DuasRoute
   '/events': typeof EventsRouteWithChildren
   '/hadith': typeof HadithRoute
@@ -166,6 +173,7 @@ export interface FileRoutesByTo {
   '/articles': typeof ArticlesRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRoute
   '/duas': typeof DuasRoute
   '/events': typeof EventsRouteWithChildren
   '/hadith': typeof HadithRoute
@@ -189,6 +197,7 @@ export interface FileRoutesById {
   '/articles': typeof ArticlesRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRoute
   '/duas': typeof DuasRoute
   '/events': typeof EventsRouteWithChildren
   '/hadith': typeof HadithRoute
@@ -214,6 +223,7 @@ export interface FileRouteTypes {
     | '/articles'
     | '/community'
     | '/contact'
+    | '/dashboard'
     | '/duas'
     | '/events'
     | '/hadith'
@@ -237,6 +247,7 @@ export interface FileRouteTypes {
     | '/articles'
     | '/community'
     | '/contact'
+    | '/dashboard'
     | '/duas'
     | '/events'
     | '/hadith'
@@ -259,6 +270,7 @@ export interface FileRouteTypes {
     | '/articles'
     | '/community'
     | '/contact'
+    | '/dashboard'
     | '/duas'
     | '/events'
     | '/hadith'
@@ -283,6 +295,7 @@ export interface RootRouteChildren {
   ArticlesRoute: typeof ArticlesRoute
   CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
+  DashboardRoute: typeof DashboardRoute
   DuasRoute: typeof DuasRoute
   EventsRoute: typeof EventsRouteWithChildren
   HadithRoute: typeof HadithRoute
@@ -333,6 +346,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/duas': {
@@ -479,6 +499,7 @@ const rootRouteChildren: RootRouteChildren = {
   ArticlesRoute: ArticlesRoute,
   CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
+  DashboardRoute: DashboardRoute,
   DuasRoute: DuasRoute,
   EventsRoute: EventsRouteWithChildren,
   HadithRoute: HadithRoute,

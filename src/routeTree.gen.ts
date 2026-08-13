@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AcademyRouteImport } from './routes/academy'
 import { Route as ArticlesRouteImport } from './routes/articles'
+import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DuasRouteImport } from './routes/duas'
 import { Route as HadithRouteImport } from './routes/hadith'
@@ -39,6 +40,11 @@ const AcademyRoute = AcademyRouteImport.update({
 const ArticlesRoute = ArticlesRouteImport.update({
   id: '/articles',
   path: '/articles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -111,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/academy': typeof AcademyRoute
   '/articles': typeof ArticlesRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/duas': typeof DuasRoute
   '/hadith': typeof HadithRoute
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/academy': typeof AcademyRoute
   '/articles': typeof ArticlesRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/duas': typeof DuasRoute
   '/hadith': typeof HadithRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/academy': typeof AcademyRoute
   '/articles': typeof ArticlesRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/duas': typeof DuasRoute
   '/hadith': typeof HadithRoute
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
     | '/'
     | '/academy'
     | '/articles'
+    | '/community'
     | '/contact'
     | '/duas'
     | '/hadith'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
     | '/'
     | '/academy'
     | '/articles'
+    | '/community'
     | '/contact'
     | '/duas'
     | '/hadith'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
     | '/'
     | '/academy'
     | '/articles'
+    | '/community'
     | '/contact'
     | '/duas'
     | '/hadith'
@@ -221,6 +233,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AcademyRoute: typeof AcademyRoute
   ArticlesRoute: typeof ArticlesRoute
+  CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
   DuasRoute: typeof DuasRoute
   HadithRoute: typeof HadithRoute
@@ -255,6 +268,13 @@ declare module '@tanstack/react-router' {
       path: '/articles'
       fullPath: '/articles'
       preLoaderRoute: typeof ArticlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -367,6 +387,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AcademyRoute: AcademyRoute,
   ArticlesRoute: ArticlesRoute,
+  CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
   DuasRoute: DuasRoute,
   HadithRoute: HadithRoute,

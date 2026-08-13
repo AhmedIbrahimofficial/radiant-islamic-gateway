@@ -42,7 +42,7 @@ export const Route = createFileRoute("/community")({
       },
     ],
   }),
-  component: CommunityPage;
+  component: CommunityPage,
 });
 
 type Profile = { name: string; city: string; about: string };

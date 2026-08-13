@@ -11,6 +11,26 @@ export function Footer() {
         </p>
         <div className="mx-auto mt-4 h-px w-40 bg-gradient-gold" />
 
+        <form
+          className="glass-dark mx-auto mt-10 flex max-w-2xl flex-col gap-3 rounded-3xl p-5 sm:flex-row"
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <input
+            type="email"
+            required
+            maxLength={255}
+            placeholder="Your email for weekly reminders"
+            aria-label="Email address"
+            className="flex-1 rounded-full border border-gold/30 bg-transparent px-5 py-3 text-sm text-cream outline-none placeholder:text-cream/50 focus:border-gold/70"
+          />
+          <button
+            type="submit"
+            className="rounded-full bg-gradient-gold px-6 py-3 text-sm font-semibold text-gold-foreground shadow-gold"
+          >
+            Subscribe
+          </button>
+        </form>
+
         <div className="mt-12 grid gap-10 md:grid-cols-3">
           <div>
             <h3 className="text-xl font-semibold text-cream">Nur al-Huda</h3>
@@ -40,6 +60,8 @@ export function Footer() {
                 { to: "/hadith", label: "Hadith Collection" },
                 { to: "/duas", label: "Daily Duas" },
                 { to: "/prayer-times", label: "Prayer Times" },
+                { to: "/library", label: "Book Library" },
+                { to: "/dashboard", label: "My Dashboard" },
                 { to: "/history", label: "Islamic History" },
               ].map((l) => (
                 <Link

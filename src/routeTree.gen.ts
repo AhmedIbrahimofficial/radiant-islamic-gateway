@@ -12,15 +12,23 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AcademyRouteImport } from './routes/academy'
 import { Route as ArticlesRouteImport } from './routes/articles'
+import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DuasRouteImport } from './routes/duas'
+import { Route as EventsRouteImport } from './routes/events'
 import { Route as HadithRouteImport } from './routes/hadith'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as KidsRouteImport } from './routes/kids'
+import { Route as LibraryRouteImport } from './routes/library'
 import { Route as NamesRouteImport } from './routes/names'
 import { Route as PrayerTimesRouteImport } from './routes/prayer-times'
+import { Route as QiblaRouteImport } from './routes/qibla'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as QuranRouteImport } from './routes/quran'
+import { Route as VideosRouteImport } from './routes/videos'
+import { Route as ZakatRouteImport } from './routes/zakat'
+import { Route as EventsEventIdRouteImport } from './routes/events.$eventId'
 import { Route as QuranIndexRouteImport } from './routes/quran.index'
 import { Route as QuranSurahIdRouteImport } from './routes/quran.$surahId'
 
@@ -39,14 +47,29 @@ const ArticlesRoute = ArticlesRouteImport.update({
   path: '/articles',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DuasRoute = DuasRouteImport.update({
   id: '/duas',
   path: '/duas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HadithRoute = HadithRouteImport.update({
@@ -64,6 +87,11 @@ const KidsRoute = KidsRouteImport.update({
   path: '/kids',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LibraryRoute = LibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NamesRoute = NamesRouteImport.update({
   id: '/names',
   path: '/names',
@@ -72,6 +100,11 @@ const NamesRoute = NamesRouteImport.update({
 const PrayerTimesRoute = PrayerTimesRouteImport.update({
   id: '/prayer-times',
   path: '/prayer-times',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QiblaRoute = QiblaRouteImport.update({
+  id: '/qibla',
+  path: '/qibla',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QuizRoute = QuizRouteImport.update({
@@ -83,6 +116,21 @@ const QuranRoute = QuranRouteImport.update({
   id: '/quran',
   path: '/quran',
   getParentRoute: () => rootRouteImport,
+} as any)
+const VideosRoute = VideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ZakatRoute = ZakatRouteImport.update({
+  id: '/zakat',
+  path: '/zakat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsEventIdRoute = EventsEventIdRouteImport.update({
+  id: '/$eventId',
+  path: '/$eventId',
+  getParentRoute: () => EventsRoute,
 } as any)
 const QuranIndexRoute = QuranIndexRouteImport.update({
   id: '/',
@@ -99,15 +147,23 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/academy': typeof AcademyRoute
   '/articles': typeof ArticlesRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRoute
   '/duas': typeof DuasRoute
+  '/events': typeof EventsRouteWithChildren
   '/hadith': typeof HadithRoute
   '/history': typeof HistoryRoute
   '/kids': typeof KidsRoute
+  '/library': typeof LibraryRoute
   '/names': typeof NamesRoute
   '/prayer-times': typeof PrayerTimesRoute
+  '/qibla': typeof QiblaRoute
   '/quiz': typeof QuizRoute
   '/quran': typeof QuranRouteWithChildren
+  '/videos': typeof VideosRoute
+  '/zakat': typeof ZakatRoute
+  '/events/$eventId': typeof EventsEventIdRoute
   '/quran/$surahId': typeof QuranSurahIdRoute
   '/quran/': typeof QuranIndexRoute
 }
@@ -115,14 +171,22 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/academy': typeof AcademyRoute
   '/articles': typeof ArticlesRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRoute
   '/duas': typeof DuasRoute
+  '/events': typeof EventsRouteWithChildren
   '/hadith': typeof HadithRoute
   '/history': typeof HistoryRoute
   '/kids': typeof KidsRoute
+  '/library': typeof LibraryRoute
   '/names': typeof NamesRoute
   '/prayer-times': typeof PrayerTimesRoute
+  '/qibla': typeof QiblaRoute
   '/quiz': typeof QuizRoute
+  '/videos': typeof VideosRoute
+  '/zakat': typeof ZakatRoute
+  '/events/$eventId': typeof EventsEventIdRoute
   '/quran/$surahId': typeof QuranSurahIdRoute
   '/quran': typeof QuranIndexRoute
 }
@@ -131,15 +195,23 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/academy': typeof AcademyRoute
   '/articles': typeof ArticlesRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRoute
   '/duas': typeof DuasRoute
+  '/events': typeof EventsRouteWithChildren
   '/hadith': typeof HadithRoute
   '/history': typeof HistoryRoute
   '/kids': typeof KidsRoute
+  '/library': typeof LibraryRoute
   '/names': typeof NamesRoute
   '/prayer-times': typeof PrayerTimesRoute
+  '/qibla': typeof QiblaRoute
   '/quiz': typeof QuizRoute
   '/quran': typeof QuranRouteWithChildren
+  '/videos': typeof VideosRoute
+  '/zakat': typeof ZakatRoute
+  '/events/$eventId': typeof EventsEventIdRoute
   '/quran/$surahId': typeof QuranSurahIdRoute
   '/quran/': typeof QuranIndexRoute
 }
@@ -149,15 +221,23 @@ export interface FileRouteTypes {
     | '/'
     | '/academy'
     | '/articles'
+    | '/community'
     | '/contact'
+    | '/dashboard'
     | '/duas'
+    | '/events'
     | '/hadith'
     | '/history'
     | '/kids'
+    | '/library'
     | '/names'
     | '/prayer-times'
+    | '/qibla'
     | '/quiz'
     | '/quran'
+    | '/videos'
+    | '/zakat'
+    | '/events/$eventId'
     | '/quran/$surahId'
     | '/quran/'
   fileRoutesByTo: FileRoutesByTo
@@ -165,14 +245,22 @@ export interface FileRouteTypes {
     | '/'
     | '/academy'
     | '/articles'
+    | '/community'
     | '/contact'
+    | '/dashboard'
     | '/duas'
+    | '/events'
     | '/hadith'
     | '/history'
     | '/kids'
+    | '/library'
     | '/names'
     | '/prayer-times'
+    | '/qibla'
     | '/quiz'
+    | '/videos'
+    | '/zakat'
+    | '/events/$eventId'
     | '/quran/$surahId'
     | '/quran'
   id:
@@ -180,15 +268,23 @@ export interface FileRouteTypes {
     | '/'
     | '/academy'
     | '/articles'
+    | '/community'
     | '/contact'
+    | '/dashboard'
     | '/duas'
+    | '/events'
     | '/hadith'
     | '/history'
     | '/kids'
+    | '/library'
     | '/names'
     | '/prayer-times'
+    | '/qibla'
     | '/quiz'
     | '/quran'
+    | '/videos'
+    | '/zakat'
+    | '/events/$eventId'
     | '/quran/$surahId'
     | '/quran/'
   fileRoutesById: FileRoutesById
@@ -197,15 +293,22 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AcademyRoute: typeof AcademyRoute
   ArticlesRoute: typeof ArticlesRoute
+  CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
+  DashboardRoute: typeof DashboardRoute
   DuasRoute: typeof DuasRoute
+  EventsRoute: typeof EventsRouteWithChildren
   HadithRoute: typeof HadithRoute
   HistoryRoute: typeof HistoryRoute
   KidsRoute: typeof KidsRoute
+  LibraryRoute: typeof LibraryRoute
   NamesRoute: typeof NamesRoute
   PrayerTimesRoute: typeof PrayerTimesRoute
+  QiblaRoute: typeof QiblaRoute
   QuizRoute: typeof QuizRoute
   QuranRoute: typeof QuranRouteWithChildren
+  VideosRoute: typeof VideosRoute
+  ZakatRoute: typeof ZakatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -231,6 +334,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArticlesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -238,11 +348,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/duas': {
       id: '/duas'
       path: '/duas'
       fullPath: '/duas'
       preLoaderRoute: typeof DuasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hadith': {
@@ -266,6 +390,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KidsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/library': {
+      id: '/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof LibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/names': {
       id: '/names'
       path: '/names'
@@ -278,6 +409,13 @@ declare module '@tanstack/react-router' {
       path: '/prayer-times'
       fullPath: '/prayer-times'
       preLoaderRoute: typeof PrayerTimesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/qibla': {
+      id: '/qibla'
+      path: '/qibla'
+      fullPath: '/qibla'
+      preLoaderRoute: typeof QiblaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/quiz': {
@@ -293,6 +431,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/quran'
       preLoaderRoute: typeof QuranRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/videos': {
+      id: '/videos'
+      path: '/videos'
+      fullPath: '/videos'
+      preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/zakat': {
+      id: '/zakat'
+      path: '/zakat'
+      fullPath: '/zakat'
+      preLoaderRoute: typeof ZakatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/$eventId': {
+      id: '/events/$eventId'
+      path: '/$eventId'
+      fullPath: '/events/$eventId'
+      preLoaderRoute: typeof EventsEventIdRouteImport
+      parentRoute: typeof EventsRoute
     }
     '/quran/': {
       id: '/quran/'
@@ -311,6 +470,17 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface EventsRouteChildren {
+  EventsEventIdRoute: typeof EventsEventIdRoute
+}
+
+const EventsRouteChildren: EventsRouteChildren = {
+  EventsEventIdRoute: EventsEventIdRoute,
+}
+
+const EventsRouteWithChildren =
+  EventsRoute._addFileChildren(EventsRouteChildren)
+
 interface QuranRouteChildren {
   QuranSurahIdRoute: typeof QuranSurahIdRoute
   QuranIndexRoute: typeof QuranIndexRoute
@@ -327,15 +497,22 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AcademyRoute: AcademyRoute,
   ArticlesRoute: ArticlesRoute,
+  CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
+  DashboardRoute: DashboardRoute,
   DuasRoute: DuasRoute,
+  EventsRoute: EventsRouteWithChildren,
   HadithRoute: HadithRoute,
   HistoryRoute: HistoryRoute,
   KidsRoute: KidsRoute,
+  LibraryRoute: LibraryRoute,
   NamesRoute: NamesRoute,
   PrayerTimesRoute: PrayerTimesRoute,
+  QiblaRoute: QiblaRoute,
   QuizRoute: QuizRoute,
   QuranRoute: QuranRouteWithChildren,
+  VideosRoute: VideosRoute,
+  ZakatRoute: ZakatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

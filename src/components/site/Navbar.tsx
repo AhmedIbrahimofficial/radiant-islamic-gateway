@@ -12,6 +12,13 @@ const links = [
   { to: "/quiz", label: "Quiz" },
   { to: "/kids", label: "Kids" },
   { to: "/prayer-times", label: "Prayer Times" },
+  { to: "/community", label: "Community" },
+  { to: "/events", label: "Events" },
+  { to: "/library", label: "Library" },
+  { to: "/videos", label: "Videos" },
+  { to: "/zakat", label: "Zakat" },
+  { to: "/qibla", label: "Qibla" },
+  { to: "/dashboard", label: "Dashboard" },
   { to: "/articles", label: "Islamic Articles" },
   { to: "/history", label: "Islamic History" },
   { to: "/contact", label: "Contact" },
@@ -53,7 +60,7 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-1 xl:flex">
+        <div className="hidden max-w-full flex-wrap items-center justify-end gap-1 xl:flex">
           {links.map((l) => (
             <Link
               key={l.to}

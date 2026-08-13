@@ -15,6 +15,7 @@ import { Route as ArticlesRouteImport } from './routes/articles'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DuasRouteImport } from './routes/duas'
+import { Route as EventsRouteImport } from './routes/events'
 import { Route as HadithRouteImport } from './routes/hadith'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as KidsRouteImport } from './routes/kids'
@@ -24,6 +25,7 @@ import { Route as QiblaRouteImport } from './routes/qibla'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as QuranRouteImport } from './routes/quran'
 import { Route as ZakatRouteImport } from './routes/zakat'
+import { Route as EventsEventIdRouteImport } from './routes/events.$eventId'
 import { Route as QuranIndexRouteImport } from './routes/quran.index'
 import { Route as QuranSurahIdRouteImport } from './routes/quran.$surahId'
 
@@ -55,6 +57,11 @@ const ContactRoute = ContactRouteImport.update({
 const DuasRoute = DuasRouteImport.update({
   id: '/duas',
   path: '/duas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HadithRoute = HadithRouteImport.update({
@@ -102,6 +109,11 @@ const ZakatRoute = ZakatRouteImport.update({
   path: '/zakat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsEventIdRoute = EventsEventIdRouteImport.update({
+  id: '/$eventId',
+  path: '/$eventId',
+  getParentRoute: () => EventsRoute,
+} as any)
 const QuranIndexRoute = QuranIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -120,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/duas': typeof DuasRoute
+  '/events': typeof EventsRouteWithChildren
   '/hadith': typeof HadithRoute
   '/history': typeof HistoryRoute
   '/kids': typeof KidsRoute
@@ -129,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/quiz': typeof QuizRoute
   '/quran': typeof QuranRouteWithChildren
   '/zakat': typeof ZakatRoute
+  '/events/$eventId': typeof EventsEventIdRoute
   '/quran/$surahId': typeof QuranSurahIdRoute
   '/quran/': typeof QuranIndexRoute
 }
@@ -139,6 +153,7 @@ export interface FileRoutesByTo {
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/duas': typeof DuasRoute
+  '/events': typeof EventsRouteWithChildren
   '/hadith': typeof HadithRoute
   '/history': typeof HistoryRoute
   '/kids': typeof KidsRoute
@@ -147,6 +162,7 @@ export interface FileRoutesByTo {
   '/qibla': typeof QiblaRoute
   '/quiz': typeof QuizRoute
   '/zakat': typeof ZakatRoute
+  '/events/$eventId': typeof EventsEventIdRoute
   '/quran/$surahId': typeof QuranSurahIdRoute
   '/quran': typeof QuranIndexRoute
 }
@@ -158,6 +174,7 @@ export interface FileRoutesById {
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/duas': typeof DuasRoute
+  '/events': typeof EventsRouteWithChildren
   '/hadith': typeof HadithRoute
   '/history': typeof HistoryRoute
   '/kids': typeof KidsRoute
@@ -167,6 +184,7 @@ export interface FileRoutesById {
   '/quiz': typeof QuizRoute
   '/quran': typeof QuranRouteWithChildren
   '/zakat': typeof ZakatRoute
+  '/events/$eventId': typeof EventsEventIdRoute
   '/quran/$surahId': typeof QuranSurahIdRoute
   '/quran/': typeof QuranIndexRoute
 }
@@ -179,6 +197,7 @@ export interface FileRouteTypes {
     | '/community'
     | '/contact'
     | '/duas'
+    | '/events'
     | '/hadith'
     | '/history'
     | '/kids'
@@ -188,6 +207,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/quran'
     | '/zakat'
+    | '/events/$eventId'
     | '/quran/$surahId'
     | '/quran/'
   fileRoutesByTo: FileRoutesByTo
@@ -198,6 +218,7 @@ export interface FileRouteTypes {
     | '/community'
     | '/contact'
     | '/duas'
+    | '/events'
     | '/hadith'
     | '/history'
     | '/kids'
@@ -206,6 +227,7 @@ export interface FileRouteTypes {
     | '/qibla'
     | '/quiz'
     | '/zakat'
+    | '/events/$eventId'
     | '/quran/$surahId'
     | '/quran'
   id:
@@ -216,6 +238,7 @@ export interface FileRouteTypes {
     | '/community'
     | '/contact'
     | '/duas'
+    | '/events'
     | '/hadith'
     | '/history'
     | '/kids'
@@ -225,6 +248,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/quran'
     | '/zakat'
+    | '/events/$eventId'
     | '/quran/$surahId'
     | '/quran/'
   fileRoutesById: FileRoutesById
@@ -236,6 +260,7 @@ export interface RootRouteChildren {
   CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
   DuasRoute: typeof DuasRoute
+  EventsRoute: typeof EventsRouteWithChildren
   HadithRoute: typeof HadithRoute
   HistoryRoute: typeof HistoryRoute
   KidsRoute: typeof KidsRoute
@@ -289,6 +314,13 @@ declare module '@tanstack/react-router' {
       path: '/duas'
       fullPath: '/duas'
       preLoaderRoute: typeof DuasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hadith': {
@@ -354,6 +386,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ZakatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events/$eventId': {
+      id: '/events/$eventId'
+      path: '/$eventId'
+      fullPath: '/events/$eventId'
+      preLoaderRoute: typeof EventsEventIdRouteImport
+      parentRoute: typeof EventsRoute
+    }
     '/quran/': {
       id: '/quran/'
       path: '/'
@@ -370,6 +409,17 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface EventsRouteChildren {
+  EventsEventIdRoute: typeof EventsEventIdRoute
+}
+
+const EventsRouteChildren: EventsRouteChildren = {
+  EventsEventIdRoute: EventsEventIdRoute,
+}
+
+const EventsRouteWithChildren =
+  EventsRoute._addFileChildren(EventsRouteChildren)
 
 interface QuranRouteChildren {
   QuranSurahIdRoute: typeof QuranSurahIdRoute
@@ -390,6 +440,7 @@ const rootRouteChildren: RootRouteChildren = {
   CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
   DuasRoute: DuasRoute,
+  EventsRoute: EventsRouteWithChildren,
   HadithRoute: HadithRoute,
   HistoryRoute: HistoryRoute,
   KidsRoute: KidsRoute,

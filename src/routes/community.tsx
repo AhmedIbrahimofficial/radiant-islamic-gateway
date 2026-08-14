@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Award,
+  EyeOff,
   Flag,
   Heart,
   MessageCircle,
+  RotateCcw,
   Send,
   Shield,
   Sparkles,
@@ -47,6 +49,26 @@ export const Route = createFileRoute("/community")({
 
 type Profile = { name: string; city: string; about: string };
 type Stats = { posts: number; answers: number; likes: number };
+
+const blockedTerms = [
+  "kafir",
+  "idiot",
+  "stupid",
+  "hate you",
+  "kill",
+  "shut up",
+  "damn",
+];
+
+function moderationIssue(text: string) {
+  const lower = text.toLowerCase();
+  const hit = blockedTerms.find((t) => lower.includes(t));
+  if (hit) return `Please rephrase with adab — the word "${hit}" isn't allowed here.`;
+  if (/(https?:\/\/|www\.)/i.test(text)) return "External links are reviewed by moderators — please describe the source instead.";
+  if (text.replace(/[^A-Z]/g, "").length > 20 && text === text.toUpperCase())
+    return "Please avoid writing in full capitals.";
+  return null;
+}
 
 function CommunityPage() {
   const [profile, setProfile] = useLocalState<Profile>("nuralhuda:community-profile", {
@@ -94,6 +116,11 @@ function CommunityPage() {
       toast.error("Please write a clear title (8+ characters) and a message of at least 20 characters.");
       return;
     }
+    const issue = moderationIssue(`${title} ${body}`);
+    if (issue) {
+      toast.error(issue);
+      return;
+    }
     const post: Discussion = {
       id: `mine-${Date.now()}`,
       category: askCategory,
@@ -116,6 +143,11 @@ function CommunityPage() {
   const submitQuestion = () => {
     if (ask.trim().length < 10) {
       toast.error("Please write your question in at least 10 characters.");
+      return;
+    }
+    const issue = moderationIssue(ask);
+    if (issue) {
+      toast.error(issue);
       return;
     }
     const item: QAItem = {
@@ -227,6 +259,7 @@ function CommunityPage() {
               <div className="mt-4 grid gap-3">
                 {achievements.map((a) => {
                   const done = earned.includes(a);
+                  const pct = Math.min(100, Math.round((stats[a.metric] / a.requirement) * 100));
                   return (
                     <div
                       key={a.title}
@@ -239,6 +272,15 @@ function CommunityPage() {
                         {done && <Sparkles className="size-4 text-gold" />}
                       </p>
                       <p className="mt-1 text-xs text-muted-foreground">{a.description}</p>
+                      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-secondary">
+                        <div
+                          className="h-full rounded-full bg-gradient-gold transition-all duration-500"
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                      <p className="mt-1.5 text-[11px] text-muted-foreground">
+                        {Math.min(stats[a.metric], a.requirement)} / {a.requirement} {a.metric}
+                      </p>
                     </div>
                   );
                 })}
@@ -254,6 +296,44 @@ function CommunityPage() {
                   <li key={g}>• {g}</li>
                 ))}
               </ul>
+            </div>
+
+            <div className="glass rounded-3xl p-6">
+              <h3 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+                <EyeOff className="size-5 text-gold" /> Moderation queue
+              </h3>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Posts you reported are hidden from your feed while moderators review them.
+              </p>
+              {flagged.length === 0 ? (
+                <p className="mt-4 rounded-2xl border border-border p-4 text-sm text-muted-foreground">
+                  Nothing reported — the feed is clear, alhamdulillah.
+                </p>
+              ) : (
+                <div className="mt-4 grid gap-3">
+                  {flagged.map((id) => {
+                    const item = discussions.find((d) => d.id === id);
+                    return (
+                      <div key={id} className="rounded-2xl border border-destructive/40 p-4">
+                        <p className="text-sm font-medium text-foreground">
+                          {item?.title ?? "Reported post"}
+                        </p>
+                        <p className="mt-1 text-xs text-muted-foreground">Under review</p>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFlagged(flagged.filter((f) => f !== id));
+                            toast.success("Restored to your feed.");
+                          }}
+                          className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-gold/40 px-4 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-gold/10"
+                        >
+                          <RotateCcw className="size-3.5" /> Undo report
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
 

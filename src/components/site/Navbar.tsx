@@ -60,13 +60,13 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden max-w-full flex-wrap items-center justify-end gap-1 xl:flex">
+        <div className="hidden max-w-full items-center justify-end gap-1 overflow-x-auto overscroll-x-contain whitespace-nowrap [scrollbar-color:var(--gold)_transparent] [scrollbar-width:thin] xl:flex">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
               activeOptions={{ exact: l.to === "/" }}
-              className="rounded-full px-3 py-2 text-sm font-medium text-cream/80 transition-colors hover:bg-gold/15 hover:text-gold"
+              className="shrink-0 rounded-full px-3 py-2 text-sm font-medium text-cream/80 transition-colors hover:bg-gold/15 hover:text-gold"
               activeProps={{ className: "bg-gold/20 text-gold" }}
             >
               {l.label}
@@ -86,7 +86,7 @@ export function Navbar() {
 
       {open && (
         <div className="border-t border-gold/20 bg-emerald-deep/97 px-4 pt-2 pb-6 backdrop-blur-xl xl:hidden">
-          <div className="grid gap-1">
+          <div className="grid max-h-[70vh] gap-1 overflow-y-auto overscroll-contain pr-1 [scrollbar-color:var(--gold)_transparent] [scrollbar-width:thin]">
             {links.map((l) => (
               <Link
                 key={l.to}

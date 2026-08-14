@@ -84,6 +84,23 @@ export function Navbar() {
         </button>
       </nav>
 
+      <div className="border-t border-gold/15 xl:hidden">
+        <div className="mx-auto flex max-w-7xl snap-x snap-mandatory items-center gap-1 overflow-x-auto overscroll-x-contain whitespace-nowrap px-4 py-2 sm:px-6 [scrollbar-color:var(--gold)_transparent] [scrollbar-width:thin]">
+          {links.map((l) => (
+            <Link
+              key={l.to}
+              to={l.to}
+              onClick={() => setOpen(false)}
+              activeOptions={{ exact: l.to === "/" }}
+              className="shrink-0 snap-start rounded-full border border-gold/20 px-3 py-1.5 text-xs font-medium text-cream/80 transition-colors hover:bg-gold/15 hover:text-gold"
+              activeProps={{ className: "bg-gold/20 text-gold border-gold/50" }}
+            >
+              {l.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+
       {open && (
         <div className="border-t border-gold/20 bg-emerald-deep/97 px-4 pt-2 pb-6 backdrop-blur-xl xl:hidden">
           <div className="grid max-h-[70vh] gap-1 overflow-y-auto overscroll-contain pr-1 [scrollbar-color:var(--gold)_transparent] [scrollbar-width:thin]">

@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Award,
+  EyeOff,
   Flag,
   Heart,
   MessageCircle,
+  RotateCcw,
   Send,
   Shield,
   Sparkles,
@@ -47,6 +49,26 @@ export const Route = createFileRoute("/community")({
 
 type Profile = { name: string; city: string; about: string };
 type Stats = { posts: number; answers: number; likes: number };
+
+const blockedTerms = [
+  "kafir",
+  "idiot",
+  "stupid",
+  "hate you",
+  "kill",
+  "shut up",
+  "damn",
+];
+
+function moderationIssue(text: string) {
+  const lower = text.toLowerCase();
+  const hit = blockedTerms.find((t) => lower.includes(t));
+  if (hit) return `Please rephrase with adab — the word "${hit}" isn't allowed here.`;
+  if (/(https?:\/\/|www\.)/i.test(text)) return "External links are reviewed by moderators — please describe the source instead.";
+  if (text.replace(/[^A-Z]/g, "").length > 20 && text === text.toUpperCase())
+    return "Please avoid writing in full capitals.";
+  return null;
+}
 
 function CommunityPage() {
   const [profile, setProfile] = useLocalState<Profile>("nuralhuda:community-profile", {
@@ -94,6 +116,11 @@ function CommunityPage() {
       toast.error("Please write a clear title (8+ characters) and a message of at least 20 characters.");
       return;
     }
+    const issue = moderationIssue(`${title} ${body}`);
+    if (issue) {
+      toast.error(issue);
+      return;
+    }
     const post: Discussion = {
       id: `mine-${Date.now()}`,
       category: askCategory,
@@ -116,6 +143,11 @@ function CommunityPage() {
   const submitQuestion = () => {
     if (ask.trim().length < 10) {
       toast.error("Please write your question in at least 10 characters.");
+      return;
+    }
+    const issue = moderationIssue(ask);
+    if (issue) {
+      toast.error(issue);
       return;
     }
     const item: QAItem = {

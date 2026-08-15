@@ -31,7 +31,6 @@ function VideosPage() {
   const [later, setLater] = useLocalState<string[]>("nuralhuda:watch-later", []);
   const [favourites, setFavourites] = useLocalState<string[]>("nuralhuda:video-favourites", []);
   const [playing, setPlaying] = useState<string | null>(null);
-  const active = videos.find((v) => v.id === playing);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock, Heart, PlayCircle, Search } from "lucide-react";
+import { Clock, Heart, PlayCircle, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 
 import { PageHeader } from "../components/site/PageHeader";
@@ -30,6 +30,8 @@ function VideosPage() {
   const [tab, setTab] = useState<"all" | "later" | "favourites">("all");
   const [later, setLater] = useLocalState<string[]>("nuralhuda:watch-later", []);
   const [favourites, setFavourites] = useLocalState<string[]>("nuralhuda:video-favourites", []);
+  const [playing, setPlaying] = useState<string | null>(null);
+  const active = videos.find((v) => v.id === playing);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -100,13 +102,45 @@ function VideosPage() {
                 key={v.id}
                 className="glass rise-in flex flex-col overflow-hidden rounded-3xl transition-all duration-300 hover:-translate-y-1 hover:shadow-luxe"
               >
-                <div className="relative grid aspect-video place-items-center bg-gradient-emerald">
-                  <div className="islamic-pattern absolute inset-0 opacity-40" aria-hidden />
-                  <PlayCircle className="relative size-14 text-gold transition-transform duration-300 group-hover:scale-110" strokeWidth={1.2} />
-                  <span className="absolute bottom-3 right-3 rounded-full bg-emerald-deep/80 px-3 py-1 text-xs text-cream">
-                    {v.duration}
-                  </span>
-                </div>
+                {playing === v.id ? (
+                  <div className="relative aspect-video bg-emerald-deep">
+                    <iframe
+                      className="absolute inset-0 size-full"
+                      src={`https://www.youtube-nocookie.com/embed/${v.youtubeId}?autoplay=1&rel=0`}
+                      title={v.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                    <button
+                      type="button"
+                      aria-label="Close player"
+                      onClick={() => setPlaying(null)}
+                      className="absolute right-2 top-2 z-10 rounded-full bg-emerald-deep/80 p-1.5 text-cream"
+                    >
+                      <X className="size-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setPlaying(v.id)}
+                    aria-label={`Play ${v.title}`}
+                    className="group relative grid aspect-video w-full place-items-center bg-gradient-emerald"
+                  >
+                    <img
+                      src={`https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg`}
+                      alt={v.title}
+                      loading="lazy"
+                      className="absolute inset-0 size-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-90"
+                    />
+                    <div className="islamic-pattern absolute inset-0 opacity-30" aria-hidden />
+                    <PlayCircle className="relative size-14 text-gold transition-transform duration-300 group-hover:scale-110" strokeWidth={1.2} />
+                    <span className="absolute bottom-3 right-3 rounded-full bg-emerald-deep/80 px-3 py-1 text-xs text-cream">
+                      {v.duration}
+                    </span>
+                  </button>
+                )}
                 <div className="flex flex-1 flex-col p-6">
                   <span className="text-xs tracking-[0.2em] text-gold uppercase">{v.category} · {v.topic}</span>
                   <h3 className="mt-3 text-lg font-semibold text-foreground">{v.title}</h3>

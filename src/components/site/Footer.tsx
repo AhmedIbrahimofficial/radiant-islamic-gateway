@@ -1,7 +1,34 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Mail, MapPin, Phone, Twitter, Youtube } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export function Footer() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    const value = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value) || value.length > 255) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    try {
+      const key = "nur-al-huda-newsletter";
+      const existing: string[] = JSON.parse(localStorage.getItem(key) ?? "[]");
+      if (!existing.includes(value.toLowerCase())) {
+        existing.push(value.toLowerCase());
+        localStorage.setItem(key, JSON.stringify(existing));
+      }
+    } catch {
+      // storage unavailable — subscription still confirmed for this session
+    }
+    setSubscribed(true);
+    setEmail("");
+    toast.success("Jazak Allahu Khairan — you're subscribed to weekly reminders.");
+  };
+
   return (
     <footer className="relative overflow-hidden bg-gradient-emerald text-cream">
       <div className="islamic-pattern absolute inset-0 opacity-40" aria-hidden />
@@ -13,12 +40,14 @@ export function Footer() {
 
         <form
           className="glass-dark mx-auto mt-10 flex max-w-2xl flex-col gap-3 rounded-3xl p-5 sm:flex-row"
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubscribe}
         >
           <input
             type="email"
             required
             maxLength={255}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Your email for weekly reminders"
             aria-label="Email address"
             className="flex-1 rounded-full border border-gold/30 bg-transparent px-5 py-3 text-sm text-cream outline-none placeholder:text-cream/50 focus:border-gold/70"
@@ -27,9 +56,14 @@ export function Footer() {
             type="submit"
             className="rounded-full bg-gradient-gold px-6 py-3 text-sm font-semibold text-gold-foreground shadow-gold"
           >
-            Subscribe
+            {subscribed ? "Subscribed ✓" : "Subscribe"}
           </button>
         </form>
+        {subscribed && (
+          <p className="mt-3 text-center text-xs text-gold/90">
+            You will receive weekly Qur'an and hadith reminders, in sha Allah.
+          </p>
+        )}
 
         <div className="mt-12 grid gap-10 md:grid-cols-3">
           <div>

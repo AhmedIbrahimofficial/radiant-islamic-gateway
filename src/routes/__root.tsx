@@ -80,22 +80,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Nur al-Huda — Qur'an, Hadith & Duas" },
+      { title: "Nur al-Huda — Peaceful Islamic Learning Platform" },
       {
         name: "description",
         content:
-          "A premium Islamic platform for reading the Qur'an, authentic hadith, duas, prayer times and Islamic history.",
+          "Daily Qur'an verse, authentic hadith, duas and prayer times in a calm, elegant Islamic experience.",
       },
       { name: "author", content: "Nur al-Huda" },
-      { property: "og:title", content: "Nur al-Huda — Qur'an, Hadith & Duas" },
+      { property: "og:title", content: "Nur al-Huda — Peaceful Islamic Learning Platform" },
       {
         property: "og:description",
         content:
-          "Read the Qur'an with translations, explore hadith, duas, prayer times and Islamic history.",
+          "Daily Qur'an verse, authentic hadith, duas and prayer times in a calm, elegant Islamic experience.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Nur al-Huda — Peaceful Islamic Learning Platform" },
+      { name: "twitter:description", content: "Daily Qur'an verse, authentic hadith, duas and prayer times in a calm, elegant Islamic experience." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/15c5ebf5-2afa-4edf-9e54-1bc5aecfc11b" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/15c5ebf5-2afa-4edf-9e54-1bc5aecfc11b" },
     ],
     links: [
       {

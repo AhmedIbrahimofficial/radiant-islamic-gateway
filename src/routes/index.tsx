@@ -26,7 +26,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Nur al-Huda — Peaceful Islamic Learning Platform" },
       {
         property: "og:description",
-        content: "Daily Qur'an verse, authentic hadith, duas and prayer times.",
+        content: "Daily Qur'an verse, authentic hadith, duas and prayer times in a calm, elegant Islamic experience.",
       },
     ],
   }),

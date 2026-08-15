@@ -79,13 +79,13 @@ export function Footer() {
             <h3 className="text-sm tracking-[0.24em] text-gold uppercase">Contact</h3>
             <div className="mt-4 grid gap-3 text-sm text-cream/75">
               <p className="flex items-center gap-3">
-                <Mail className="size-4 shrink-0 text-gold" /> salam@nuralhuda.org
+                <Mail className="size-4 shrink-0 text-gold" /> robas3843@gmail.com
               </p>
               <p className="flex items-center gap-3">
-                <Phone className="size-4 shrink-0 text-gold" /> +92 300 000 0000
+                <Phone className="size-4 shrink-0 text-gold" /> 03007251874
               </p>
               <p className="flex items-center gap-3">
-                <MapPin className="size-4 shrink-0 text-gold" /> Karachi, Pakistan
+                <MapPin className="size-4 shrink-0 text-gold" /> Rahwali, Gujranwala Cantt
               </p>
             </div>
           </div>

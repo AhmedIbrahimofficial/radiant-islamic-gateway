@@ -36,9 +36,9 @@ function ContactPage() {
         <div className="mx-auto grid max-w-6xl gap-8 px-5 lg:grid-cols-[1fr_1.2fr]">
           <div className="grid content-start gap-4">
             {[
-              { Icon: Mail, label: "Email", value: "salam@nuralhuda.org" },
-              { Icon: Phone, label: "Phone", value: "+92 300 000 0000" },
-              { Icon: MapPin, label: "Address", value: "Gulshan-e-Iqbal, Karachi, Pakistan" },
+              { Icon: Mail, label: "Email", value: "robas3843@gmail.com" },
+              { Icon: Phone, label: "Phone", value: "03007251874" },
+              { Icon: MapPin, label: "Address", value: "Rahwali, Gujranwala Cantt, Pakistan" },
             ].map(({ Icon, label, value }) => (
               <div
                 key={label}
